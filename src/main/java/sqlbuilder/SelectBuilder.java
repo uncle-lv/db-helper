@@ -30,11 +30,6 @@ public class SelectBuilder extends AbstractSqlBuilder {
     }
 
     public String build() {
-        return this.toString();
-    }
-
-    @Override
-    public String toString() {
         StringBuilder sql = new StringBuilder("SELECT ");
         if (0 == columns.size()) {
             sql.append("*");
@@ -44,7 +39,11 @@ public class SelectBuilder extends AbstractSqlBuilder {
 
         appendList(sql, tables, " FROM ", ", ");
         appendList(sql, wheres, " WHERE ", " AND ");
-
         return sql.toString();
+    }
+
+    @Override
+    public String toString() {
+        return this.build();
     }
 }
