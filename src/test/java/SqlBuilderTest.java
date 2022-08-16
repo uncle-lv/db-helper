@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import sqlbuilder.DeleteBuilder;
 import sqlbuilder.InsertBuilder;
 import sqlbuilder.SelectBuilder;
 import sqlbuilder.UpdateBuilder;
@@ -33,5 +34,13 @@ public class SqlBuilderTest {
                 .where("username = \"uncle-lv\"");
 
         Assertions.assertEquals("UPDATE user SET email = \"uncle.lv@outlook.com\" WHERE username = \"uncle-lv\"", updateBuilder.toString());
+    }
+
+    @Test
+    public void testDeleteSqlBuilder() {
+        DeleteBuilder deleteBuilder = new DeleteBuilder("user")
+                .where("username = \"uncle-lv\"");
+
+        Assertions.assertEquals("DELETE FROM user WHERE username = \"uncle-lv\"", deleteBuilder.build());
     }
 }
