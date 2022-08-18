@@ -5,6 +5,8 @@ import java.util.List;
 
 public class SelectBuilder extends AbstractSqlBuilder {
 
+    private boolean distinct;
+
     private List<Object> columns = new ArrayList<Object>();
 
     private List<String> tables = new ArrayList<String>();
@@ -29,8 +31,18 @@ public class SelectBuilder extends AbstractSqlBuilder {
         return this;
     }
 
+    public SelectBuilder distinct() {
+        this.distinct = true;
+        return this;
+    }
+
     public String build() {
         StringBuilder sql = new StringBuilder("SELECT ");
+
+        if (distinct) {
+            sql.append("DISTINCT ");
+        }
+
         if (0 == columns.size()) {
             sql.append("*");
         } else {

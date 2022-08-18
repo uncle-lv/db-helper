@@ -13,9 +13,10 @@ public class SqlBuilderTest {
                 .column("username")
                 .column("email")
                 .where("gender = male")
-                .and("age >= 18");
+                .and("age >= 18")
+                .distinct();
 
-        Assertions.assertEquals("SELECT username, email FROM user WHERE gender = male AND age >= 18", selectBuilder.build());
+        Assertions.assertEquals("SELECT DISTINCT username, email FROM user WHERE gender = male AND age >= 18", selectBuilder.build());
     }
 
     @Test

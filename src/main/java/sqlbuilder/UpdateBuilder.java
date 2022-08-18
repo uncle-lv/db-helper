@@ -1,8 +1,11 @@
 package sqlbuilder;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class UpdateBuilder extends AbstractSqlBuilder {
 
     private String table;
@@ -30,6 +33,9 @@ public class UpdateBuilder extends AbstractSqlBuilder {
                 .append(table);
         appendList(sql, sets, " SET ", ", ");
         appendList(sql, wheres, " WHERE ", " AND ");
+        if (0 == wheres.size()) {
+            log.warn("UPDATE without WHERE");
+        }
         return sql.toString();
     }
 
