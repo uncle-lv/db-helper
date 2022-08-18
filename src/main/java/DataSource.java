@@ -36,9 +36,10 @@ public class DataSource {
         this.dataSource.setJdbcUrl(builder.jdbcUrl);
         this.dataSource.setUsername(builder.username);
         this.dataSource.setPassword(builder.password);
+        this.dataSource.setAutoCommit(false);
 
-        if (!builder.autoCommit) {
-            this.dataSource.setAutoCommit(false);
+        if (builder.autoCommit) {
+            this.dataSource.setAutoCommit(true);
         }
 
         if (builder.connectionTimeout > 0L) {
